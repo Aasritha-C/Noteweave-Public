@@ -1,8 +1,8 @@
 if (chrome && chrome.runtime && chrome.runtime.onInstalled) {
   chrome.runtime.onInstalled.addListener(() => {
     chrome.contextMenus.create({
-      id: "sendToNexa",
-      title: "Send to NEXA",
+      id: "sendToNoteweave",
+      title: "Send to Noteweave",
       contexts: ["selection"]
     });
   });
@@ -11,7 +11,7 @@ if (chrome && chrome.runtime && chrome.runtime.onInstalled) {
 }
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  if (info.menuItemId === "sendToNexa") {
+  if (info.menuItemId === "sendToNoteweave") {
     const selectedText = info.selectionText;
 
     fetch("http://127.0.0.1:8000/ingest", {
