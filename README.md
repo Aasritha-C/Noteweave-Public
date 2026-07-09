@@ -41,10 +41,7 @@ Query Interface
 
 ## Public Submission Note
 
-The NEXA engine is an internal/proprietary processing layer. For public college
-documentation, describe it as an AI-based entity extraction, relationship
-mapping, and graph query layer. Do not publish the private implementation files
-unless you intentionally want to disclose that logic.
+The NEXA engine is represented in this repository as an internal processing layer. For project documentation, it can be described as an AI-based component for entity extraction, relationship mapping, graph memory management, and query interpretation. The implementation details are not included in this documentation-safe package.
 
 ## Setup
 
