@@ -1,0 +1,10 @@
+uvicorn
+fastapi
+kuzu
+ollama
+python-dotenv
+numpy
+pandas
+spacy
+psutil
+requests
