@@ -6,14 +6,34 @@
     input { width: 100%; padding: 5px; box-sizing: border-box; }
     button { width: 100%; margin-top: 10px; padding: 5px; cursor: pointer; }
     #results { margin-top: 10px; font-size: 0.9em; }
+    textarea { width: 100%; box-sizing: border-box; }
+    #recentNotes { padding-left: 20px; white-space: pre-wrap; overflow-wrap: anywhere; }
     .note { border-bottom: 1px solid #ccc; padding: 5px 0; }
   </style>
 </head>
 <body>
-  <h3>NEXA Librarian</h3>
-  <input type="text" id="queryInput" placeholder="Enter entity name (e.g. Steve)">
+  <h3>Noteweave</h3>
+  <details>
+    <summary>Capture text</summary>
+    <label for="captureInput">Paste a short sentence</label>
+    <textarea id="captureInput" rows="3" maxlength="10000"
+      placeholder="The notebook is in the bag."></textarea>
+    <button id="captureBtn" type="button">Capture Text</button>
+    <p id="captureStatus" role="status"></p>
+  </details>
+  <input type="text" id="queryInput" placeholder="Where is Demo Notebook?">
   <button id="searchBtn">Search Memory</button>
-  <div id="results"></div>
+  <button id="askBtn">Ask Question</button>
+  <div id="results" role="status"></div>
+  <details id="notesPanel">
+    <summary>Manual notes</summary>
+    <label for="noteInput">Write a note</label>
+    <textarea id="noteInput" rows="3" maxlength="5000"></textarea>
+    <button id="saveNoteBtn" type="button">Save Note</button>
+    <p id="noteStatus" role="status"></p>
+    <h4>Recent notes</h4>
+    <ul id="recentNotes"></ul>
+  </details>
   <script src="popup.js"></script>
 </body>
 </html>
