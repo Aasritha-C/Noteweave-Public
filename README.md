@@ -34,46 +34,25 @@ Query Interface
 
 ## Components
 
-- `extension/` contains the Chrome extension for capture and lookup.
-- `main.py` exposes the local FastAPI endpoints.
-- `src/` contains the private/internal NEXA processing implementation.
-- `data/` is local runtime memory and should not be committed or shared.
+- `extension/` contains the browser extension for capture, lookup, questions and manual notes.
+- `engine_stub/` describes the processing layer.
 
 ## Public Submission Note
 
 The NEXA engine is represented in this repository as an internal processing layer. For project documentation, it can be described as an AI-based component for entity extraction, relationship mapping, graph memory management, and query interpretation. The implementation details are not included in this documentation-safe package.
 
-## Setup
+## Run the extension locally
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r requirements.txt
-python -m spacy download en_core_web_sm
-```
+Start a compatible Noteweave backend at `http://127.0.0.1:8000`.
+This repository contains the browser extension and project documentation.
+The backend is installed separately.
 
-Ollama must be running locally with the configured model available:
+In Chrome, open `chrome://extensions` (in Edge, use `edge://extensions`),
+enable Developer mode, select **Load unpacked**, and choose the
+`extension/` directory.
 
-```powershell
-ollama pull qwen2.5-coder:1.5b
-```
-
-## Run
-
-```powershell
-python main.py
-```
-
-The API starts at:
-
-```text
-http://127.0.0.1:8000
-```
-
-Useful endpoints:
-
-- `GET /health`
-- `POST /ingest`
-- `GET /query?q=Where is Steve?`
-- `GET /query/Steve`
-- `DELETE /clear`
+Select text on a web page and choose **Send to Noteweave** from the
+context menu. In the popup, use **Search Memory** for a named entity,
+**Ask Question** for a natural-language query, or **Manual notes** to
+save and reopen recent notes. Questions and notes require their
+corresponding endpoints on the local backend.
