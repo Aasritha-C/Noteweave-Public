@@ -1,10 +1,1 @@
-uvicorn
-fastapi
-kuzu
-ollama
-python-dotenv
-numpy
-pandas
-spacy
-psutil
-requests
+# The public demo uses only the Python standard library.
