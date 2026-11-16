@@ -1,58 +1,49 @@
-# Noteweave
+# Noteweave Public Demo
 
-Noteweave is a local-first, subject-based annotation system. It lets a browser
-extension capture selected text and send it to a local API, where an internal AI
-processing layer extracts subjects, relationships, and searchable memory links.
+Run the browser extension, two-hop location queries and manual notes from a
+single download. The public demo includes its own rule-based text extraction
+and SQLite storage. It uses Python's standard library and runs entirely on the
+presentation computer.
 
-## Project Idea
+## Run from the ZIP
 
-Traditional notes store text as isolated blocks. Noteweave stores captured text
-as subject-centered knowledge, so users can later search by entity or ask simple
-questions such as:
+1. Install Python 3.10 or later if needed, then extract the whole ZIP.
+2. Open a terminal in the extracted folder and run:
 
-- Where is Steve?
-- Who holds the apple?
-- What is connected to this subject?
+   Windows:
 
-## Architecture
+   ```powershell
+   py -3 run_demo.py
+   ```
 
-```text
-Browser Extension
-        |
-        v
-Local Noteweave API
-        |
-        v
-Internal NEXA Processing Engine
-        |
-        v
-Subject-Based Graph Memory
-        |
-        v
-Query Interface
-```
+   macOS or Linux:
 
-## Components
+   ```sh
+   python3 run_demo.py
+   ```
 
-- `extension/` contains the browser extension for capture, lookup, questions and manual notes.
-- `engine_stub/` describes the processing layer.
+3. Leave the terminal open and visit [the demo](http://127.0.0.1:8000/).
+   If port 8000 is in use, close the process using that port before starting.
 
-## Public Submission Note
+## Show the implementation
 
-The NEXA engine is represented in this repository as an internal processing layer. For project documentation, it can be described as an AI-based component for entity extraction, relationship mapping, graph memory management, and query interpretation. The implementation details are not included in this documentation-safe package.
+- Enter **Where is Demo Notebook?** and click **Ask Question**. The demo shows
+  **Demo Notebook → Demo Bag → Demo Lab** and both stored triplets.
+- Under **Capture text**, enter **The pencil is in the drawer. The drawer is in
+  the desk.** Click **Capture Text** and ask **Where is the pencil?**
+- Open **Manual notes**, save a note, then reload the page and reopen the panel.
+  The note is saved in the local database under `data/`.
 
-## Run the extension locally
+## Optional browser extension
 
-Start a compatible Noteweave backend at `http://127.0.0.1:8000`.
-This repository contains the browser extension and project documentation.
-The backend is installed separately.
+1. Open `chrome://extensions` in Chrome or `edge://extensions` in Edge.
+2. Enable **Developer mode**, select **Load unpacked**, and choose the
+   extracted `extension` folder.
+3. Select a supported sentence on a normal web page and choose
+   **Send to Noteweave** from the context menu. Use the popup to look up the
+   entity, ask a location question, or save a manual note.
 
-In Chrome, open `chrome://extensions` (in Edge, use `edge://extensions`),
-enable Developer mode, select **Load unpacked**, and choose the
-`extension/` directory.
-
-Select text on a web page and choose **Send to Noteweave** from the
-context menu. In the popup, use **Search Memory** for a named entity,
-**Ask Question** for a natural-language query, or **Manual notes** to
-save and reopen recent notes. Questions and notes require their
-corresponding endpoints on the local backend.
+The public demo recognizes simple sentence patterns such as **X is in Y**,
+**X is located in Y**, **X holds Y**, and **X contains Y**. It answers location
+questions using up to two stored location relationships. The standalone build
+uses a separate public demo backend and has no LLM dependency.
