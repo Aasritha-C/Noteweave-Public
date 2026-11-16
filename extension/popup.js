@@ -106,3 +106,34 @@ saveNoteButton.addEventListener('click', async () => {
     saveNoteButton.disabled = false;
   }
 });
+
+const captureInput = document.getElementById('captureInput');
+const captureButton = document.getElementById('captureBtn');
+const captureStatus = document.getElementById('captureStatus');
+
+captureButton.addEventListener('click', async () => {
+  const text = captureInput.value.trim();
+  if (!text) {
+    captureStatus.textContent = 'Enter a sentence first.';
+    return;
+  }
+  captureButton.disabled = true;
+  try {
+    const response = await fetch('http://127.0.0.1:8000/ingest', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text })
+    });
+    const data = await response.json();
+    captureStatus.textContent = data.status === 'success'
+      ? 'Captured: ' + data.triplets.map(fact =>
+        `${fact.subject} ${fact.predicate.replace(/_/g, ' ')} ${fact.object}`
+      ).join('; ')
+      : data.message || 'Could not capture this text.';
+  } catch (error) {
+    captureStatus.textContent = 'Could not reach the local demo server.';
+    console.error(error);
+  } finally {
+    captureButton.disabled = false;
+  }
+});
